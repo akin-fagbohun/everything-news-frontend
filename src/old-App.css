@@ -1,0 +1,84 @@
+:root {
+  /* Global Color Palette */
+  --off-white: #f1efef;
+  --dark-grey: #333533;
+  --mid-grey: #858685;
+  --mustard: #f5cb5c;
+  --pale-yellow: #f9e09d;
+
+  /* Parent Font Styling */
+  --heading-fonts: Poppins, sans-serif;
+  --body-fonts: Poppins, sans-serif;
+  --line-height: 1.5;
+}
+
+* {
+  margin: 0px;
+  border: 2px solid pink;
+  box-sizing: border-box;
+  font-family: var(--body-fonts);
+}
+
+.App {
+  text-align: center;
+}
+
+/* navigation styling start */
+
+nav {
+  display: flex;
+  /* grid-template-columns: 5em 100px 25%; */
+  /* grid-template-rows: 50px auto; */
+  justify-content: space-around;
+  align-items: center;
+  min-height: 4vh;
+  padding: 2em 1em 2em 15em;
+  max-width: auto;
+  font-weight: 700;
+  font-size: 1.25rem;
+  background-color: var(--off-white);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  letter-spacing: 0.5px;
+  background-color: var(--pale-yellow); /* remove later or make on hover */
+  list-style-type: none;
+  margin-right: 20px;
+}
+
+nav a {
+  color: var(--dark-grey);
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--mid-grey);
+}
+
+/* .nav-drawer {
+  display: none;
+} */
+
+main {
+  background-color: var(--off-white);
+}
+
+ul.no-bullets {
+  list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: 0.07rem;
+}
+
+p {
+  font-weight: 400;
+}
