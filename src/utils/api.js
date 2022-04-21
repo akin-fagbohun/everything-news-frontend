@@ -10,12 +10,12 @@ export const getTopics = () => {
   return newsApi.get('/topics');
 };
 
-export const getArticles = () => {
-  return newsApi.get('/articles');
+export const getArticles = (topic, sort_by) => {
+  return newsApi.get(`/articles`, { params: { topic, sort_by } });
 };
 
-export const getArticlesByTopic = (topic) => {
-  return newsApi.get(`/articles`, { params: { topic } });
+export const getFilteredArticles = (topic, sort_by) => {
+  return newsApi.get(`/articles`, { params: { topic, sort_by } });
 };
 
 export const getArticleById = (article_id) => {
