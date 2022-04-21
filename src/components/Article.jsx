@@ -21,13 +21,13 @@ export const Article = () => {
 
   return (
     <main>
-      <Container className="article">
-        <Title order={2}>{article.title}</Title>
+      <section className="article">
+        <h2>{article.title}</h2>
         <p>{article.body}</p>
         <Container className="credentials" size="xs" px="xs">
-          <Title order={5}>Author {article.author}</Title>
-          <Title order={5}>Category {article.topic}</Title>
-          <Title order={5}>Likes {article.votes}</Title>
+          <h5>Author {article.author}</h5>
+          <h5>Category {article.topic}</h5>
+          <h5>Likes {article.votes}</h5>
         </Container>
         <Container className="articleComments">
           <p>comments go here</p>
@@ -40,7 +40,7 @@ export const Article = () => {
         >
           Back to Articles
         </Button>
-      </Container>
+      </section>
     </main>
   );
 };

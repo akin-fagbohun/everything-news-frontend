@@ -17,8 +17,11 @@ export const Articles = () => {
 
   useEffect(() => {}, [articles]);
 
-  const handleReadArticle = (article_id) => {
-    navigate(`/articles/${article_id}`);
+  const handleReadArticle = (article_id, article_title) => {
+    const urlRegex = /\s/g;
+    const url_title = article_title.toLowerCase().replace(urlRegex, '-');
+
+    navigate(`/articles/${article_id}/${url_title}`);
   };
 
   return (
@@ -38,7 +41,7 @@ export const Articles = () => {
                 <Button
                   type="button"
                   onClick={() => {
-                    handleReadArticle(article.article_id);
+                    handleReadArticle(article.article_id, article.title);
                   }}
                 >
                   Read Article

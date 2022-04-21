@@ -16,6 +16,7 @@ function App() {
         <Route path="/articles" element={<Articles />}></Route>
         <Route path="/articles/topics/:topic" element={<Articles />}></Route>
         <Route path="/articles/:article_id" element={<Article />}></Route>
+        <Route path="/articles/:article_id/:article_title" element={<Article />}></Route>
         <Route path="/topics" element={<Topics />}></Route>
       </Routes>
     </div>
