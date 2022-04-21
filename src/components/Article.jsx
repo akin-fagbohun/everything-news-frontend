@@ -6,17 +6,17 @@ export const Article = () => {
   const [article, setArticle] = useState([]);
   const [upvote, setUpvote] = useState(null);
   const [likeState, setLikeState] = useState('Like 💫');
+  const [isLoading, setIsLoading] = useState(true);
 
   const { article_id } = useParams();
 
   useEffect(() => {
     getArticleById(article_id).then(({ data }) => {
       setArticle(data.article);
-      setUpvote(data.votes);
+      setUpvote(data.article.votes);
+      setIsLoading(false);
     });
   }, [article_id]);
-
-  useEffect(() => {}, [upvote]);
 
   const handleBackToArticles = () => {
     console.log('inside button click');
@@ -24,25 +24,19 @@ export const Article = () => {
 
   const handleLikes = (vote) => {
     if (likeState === 'Like 💫') {
-      setUpvote((currVotes) => {
-        currVotes + vote;
-      });
+      setUpvote(article.votes + vote);
       setLikeState('Liked ❤️');
-      castVote(article_id, vote).then(({ data }) => {
-        setArticle(data.article);
-        setUpvote(data.votes);
-      });
+      castVote(article_id, vote);
     } else {
-      setUpvote((currVotes) => {
-        currVotes + vote;
-      });
+      setUpvote(article.votes);
       setLikeState('Like 💫');
-      castVote(article_id, vote).then(({ data }) => {
-        setArticle(data.article);
-        setUpvote(data.votes);
-      });
+      castVote(article_id, vote);
     }
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <main>
@@ -56,7 +50,7 @@ export const Article = () => {
         <div className="credentials">
           <small>Article written by {article.author}</small>
           <p>Category {article.topic}</p>
-          <p>Likes {upvote ?? article.votes}</p>
+          <p>Likes {upvote}</p>
         </div>
         <button
           className="btn"
