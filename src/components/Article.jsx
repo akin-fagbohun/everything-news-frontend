@@ -8,7 +8,6 @@ export const Article = () => {
   const [article, setArticle] = useState([]);
 
   const { article_id } = useParams();
-  console.log(article_id, 'article ID in Article');
 
   useEffect(() => {
     getArticleById(article_id).then(({ data }) => {
@@ -38,7 +37,6 @@ export const Article = () => {
           onClick={() => {
             handleBackToArticles();
           }}
-          value={article.title}
         >
           Back to Articles
         </Button>
