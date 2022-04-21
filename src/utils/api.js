@@ -14,6 +14,10 @@ export const getArticles = () => {
   return newsApi.get('/articles');
 };
 
+export const getArticlesByTopic = (topic) => {
+  return newsApi.get(`/articles`, { params: { topic } });
+};
+
 export const getArticleById = (article_id) => {
   return newsApi.get(`/articles/${article_id}`);
 };

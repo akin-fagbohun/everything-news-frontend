@@ -1,15 +1,16 @@
 import { Button } from '@mantine/core';
 import { useState, useEffect } from 'react';
-import { getArticles } from '../utils/api';
-import { Link, useNavigate } from 'react-router-dom';
+import { getArticlesByTopic } from '../utils/api';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export const Articles = () => {
   const [articles, setArticles] = useState([]);
-
   const navigate = useNavigate();
 
+  const { topic } = useParams();
+
   useEffect(() => {
-    getArticles().then(({ data }) => {
+    getArticlesByTopic(topic).then(({ data }) => {
       setArticles(data.articles);
     });
   }, []); // eslint-disable-line
@@ -39,7 +40,6 @@ export const Articles = () => {
                   onClick={() => {
                     handleReadArticle(article.article_id);
                   }}
-                  value={article.title}
                 >
                   Read Article
                 </Button>
