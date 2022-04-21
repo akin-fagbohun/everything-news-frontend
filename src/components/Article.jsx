@@ -1,25 +1,47 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getArticleById } from '../utils/api';
-import { Button } from '@mantine/core';
+import { getArticleById, castVote } from '../utils/api';
 
 export const Article = () => {
   const [article, setArticle] = useState([]);
+  const [upvote, setUpvote] = useState(null);
+  const [likeState, setLikeState] = useState('Like 💫');
 
   const { article_id } = useParams();
 
   useEffect(() => {
     getArticleById(article_id).then(({ data }) => {
       setArticle(data.article);
+      setUpvote(data.votes);
     });
   }, [article_id]);
+
+  useEffect(() => {}, [upvote]);
 
   const handleBackToArticles = () => {
     console.log('inside button click');
   };
 
-  const handleLikes = () => {
-    console.log('inside button click');
+  const handleLikes = (vote) => {
+    if (likeState === 'Like 💫') {
+      setUpvote((currVotes) => {
+        currVotes + vote;
+      });
+      setLikeState('Liked ❤️');
+      castVote(article_id, vote).then(({ data }) => {
+        setArticle(data.article);
+        setUpvote(data.votes);
+      });
+    } else {
+      setUpvote((currVotes) => {
+        currVotes + vote;
+      });
+      setLikeState('Like 💫');
+      castVote(article_id, vote).then(({ data }) => {
+        setArticle(data.article);
+        setUpvote(data.votes);
+      });
+    }
   };
 
   return (
@@ -34,16 +56,20 @@ export const Article = () => {
         <div className="credentials">
           <small>Article written by {article.author}</small>
           <p>Category {article.topic}</p>
-          <p>Likes {article.votes}</p>
+          <p>Likes {upvote ?? article.votes}</p>
         </div>
         <button
           className="btn"
           type="button"
           onClick={() => {
-            handleLikes();
+            if (likeState === 'Like 💫') {
+              handleLikes(1);
+            } else {
+              handleLikes(-1);
+            }
           }}
         >
-          Like 💫
+          {likeState}
         </button>
 
         <button
