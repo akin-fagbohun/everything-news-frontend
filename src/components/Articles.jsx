@@ -18,8 +18,10 @@ export const Articles = () => {
   useEffect(() => {}, [articles]);
 
   const handleReadArticle = (article_id, article_title) => {
-    const urlRegex = /\s/g;
-    const url_title = article_title.toLowerCase().replace(urlRegex, '-');
+    const url_title = article_title
+      .toLowerCase()
+      .replace(/[’',.]/g, '') // removes apostrophes, commas and periods
+      .replace(/\s/g, '-'); // replaces whitespaces
 
     navigate(`/articles/${article_id}/${url_title}`);
   };
