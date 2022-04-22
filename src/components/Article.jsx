@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import * as React from 'react';
 import { getArticleById, castVote, getCommentsByArticlesId } from '../utils/api';
 
 export const Article = () => {
@@ -95,15 +96,13 @@ export const Article = () => {
           <div id="project-carousel">
             {comments.map((comment) => {
               return (
-                <>
-                  <div key={comment.comment_id} className="comment-card-head">
+                <React.Fragment key={comment.comment_id}>
+                  <div className="comment-card-head">
                     <h3>{comment.author}</h3>
                     <small>upvotes {comment.votes}</small>
                   </div>
-                  <p key={comment.comment_id} className="comment-card-body">
-                    {comment.body}
-                  </p>
-                </>
+                  <p className="comment-card-body">{comment.body}</p>
+                </React.Fragment>
               );
             })}
           </div>
