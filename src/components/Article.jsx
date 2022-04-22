@@ -24,11 +24,11 @@ export const Article = () => {
 
   const handleLikes = (vote) => {
     if (likeState === 'Like 💫') {
-      setUpvote(article.votes + vote);
+      setUpvote((currentVotes) => currentVotes + vote);
       setLikeState('Liked ❤️');
       castVote(article_id, vote);
     } else {
-      setUpvote(article.votes);
+      setUpvote((currentVotes) => currentVotes + vote);
       setLikeState('Like 💫');
       castVote(article_id, vote);
     }
