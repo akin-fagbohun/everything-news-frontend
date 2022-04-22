@@ -1,12 +1,21 @@
+:root {
+  /* Global Color Palette */
+  --off-white: #f1efef;
+  --dark-grey: #333533;
+  --mid-grey: #858685;
+  --mustard: #f5cb5c;
+  --pale-yellow: #f9e09d;
+}
+
 * {
   margin: 0px;
-  border: 2px solid pink;
+  /* border: 2px solid pink; */
   box-sizing: border-box;
 }
 
-* + * {
+/* * + * {
   border-top: 2px solid pink;
-}
+} */
 
 .App {
   text-align: center;
@@ -16,9 +25,23 @@
   padding-top: 20px;
 }
 
-/* .btn {
-  margin: 10px 0px;
-} */
+.btn {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 10px;
+  padding: 0.5rem 3rem;
+  border-radius: 5px;
+  border: 3px solid var(--mustard);
+  background-color: var(--pale-yellow);
+  color: var(--dark-grey);
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  letter-spacing: 0.1ch;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+}
 
 .cards > ul {
   display: grid;
@@ -44,4 +67,43 @@
   .grid {
     grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   }
+}
+
+.articleTitle {
+  margin: 10px 10px 0px 10px;
+  padding: 15px;
+  border-radius: 15px 15px 0 0;
+  background-color: var(--mustard);
+}
+
+.articleBody {
+  margin: 0 10px;
+  padding: 15px 25px 15px 25px;
+  background-color: var(--off-white);
+}
+
+/* .articleBody > p {
+  justify-content: left;
+} */
+
+.credentials {
+  margin: 0 10px;
+  padding: 15px;
+  background-color: var(--mid-grey);
+  color: var(--off-white);
+  border-radius: 0 0 15px 15px;
+
+  flex-flow: row;
+  height: auto;
+  z-index: 1;
+  min-width: 75%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  cursor: pointer;
+  display: flex;
+  -webkit-box-align: stretch; /* Try this above! */
+  align-items: stretch; /* Try this above! */
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding-bottom: 1rem;
 }
