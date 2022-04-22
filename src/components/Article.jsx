@@ -41,12 +41,8 @@ export const Article = () => {
   return (
     <main>
       <section className="article">
-        <div className="articleTitle">
-          <h2>{article.title}</h2>
-        </div>
-        <div className="articleBody">
-          <p>{article.body}</p>
-        </div>
+        <h2 className="articleTitle">{article.title}</h2>
+        <p className="articleBody">{article.body}</p>
         <div className="credentials">
           <small>Article written by {article.author}</small>
           <p>Category {article.topic}</p>
@@ -78,7 +74,9 @@ export const Article = () => {
       </section>
       <section>
         <div className="articleComments">
-          <p>comments go here</p>
+          <p>
+            Show Number of Comments here <br></br>make it modal, tiktok style!{' '}
+          </p>
         </div>
       </section>
     </main>

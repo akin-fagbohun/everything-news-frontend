@@ -27,7 +27,7 @@ export const Topics = () => {
             return (
               <li key={topic.slug} className="card">
                 <h5 className="title">
-                  <Link to={`/articles?q=${topic.slug}`}>{topic.slug}</Link>
+                  <Link to={`/articles/topics/${topic.slug}`}>{topic.slug}</Link>
                 </h5>
                 <p>{topic.description}</p>
                 <Button
