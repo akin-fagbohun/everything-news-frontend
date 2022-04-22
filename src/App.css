@@ -175,14 +175,16 @@
 }
 
 .articleTitle {
-  margin: 10px 10px 0px 10px;
+  margin: 50px auto 0;
+  max-width: 80%;
   padding: 15px;
   border-radius: 15px 15px 0 0;
   background-color: var(--mustard);
 }
 
 .articleBody {
-  margin: 0 10px;
+  margin: 0 auto;
+  max-width: 80%;
   padding: 15px 25px 15px 25px;
   background-color: var(--off-white);
 }
@@ -192,7 +194,8 @@
 } */
 
 .credentials {
-  margin: 0 10px;
+  margin: 0 auto;
+  max-width: 80%;
   padding: 15px;
   background-color: var(--mid-grey);
   color: var(--off-white);
