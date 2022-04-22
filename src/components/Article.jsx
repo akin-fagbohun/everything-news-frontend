@@ -94,33 +94,22 @@ export const Article = () => {
         </button>
       </section>
       <section>
-        <div className="commentsHeader">
-          <p>💬 {comments.length} Comments</p>
-        </div>
+        <p className="commentsHeader">💬 {comments.length} Comments</p>
         <div className="commentsBody">
           <div id="project-carousel">
             {comments.map((comment) => {
               return (
-                <div key={comment.comment_id} className="project-card">
-                  {comment.body}
-                </div>
+                <>
+                  <div key={comment.comment_id} className="comment-card-head">
+                    <h3>{comment.author}</h3>
+                    <small>upvotes {comment.votes}</small>
+                  </div>
+                  <p key={comment.comment_id} className="comment-card-body">
+                    {comment.body}
+                  </p>
+                </>
               );
             })}
-            <div className="project-card">
-              <img src="" alt="" />
-            </div>
-            <div className="project-card">
-              <img src="" alt="" />
-            </div>
-            <div className="project-card">
-              <img src="" alt="" />
-            </div>
-            <div className="project-card">
-              <img src="" alt="" />
-            </div>
-            <div className="project-card">
-              <img src="" alt="" />
-            </div>
           </div>
           <form onSubmit={handlePostComment}>
             <label htmlFor="newComment" className="textarea-label">
