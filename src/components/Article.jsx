@@ -1,13 +1,23 @@
 import { useParams } from 'react-router-dom';
+// import { UserContext } from '../contexts/Users';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
 import { getArticleById, castVote, getCommentsByArticlesId } from '../utils/api';
+import { CommentForm } from './CommentForm';
+import { DeleteCommentButton } from './DeleteCommentButton';
+import { UpvoteButton } from './UpvoteButton';
+import { DownvoteButton } from './DownvoteButton';
 
 export const Article = () => {
+  // React Global Contexts
+  // const { loggedIn } = useContext(UserContext);
+
   const [article, setArticle] = useState([]);
   const [upvote, setUpvote] = useState(null);
   const [likeState, setLikeState] = useState('Like 💫');
   const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const { article_id } = useParams();
 
@@ -20,11 +30,10 @@ export const Article = () => {
       .then(() => {
         getCommentsByArticlesId(article_id).then(({ data }) => {
           setComments(data.comments);
+          setIsLoading(false);
         });
       });
   }, [article_id]);
-
-  useEffect(() => {}, [upvote]);
 
   const handleBackToArticles = () => {
     console.log('inside button click');
@@ -52,9 +61,9 @@ export const Article = () => {
     }
   };
 
-  const handlePostComment = (comment) => {
-    console.log(comment);
-  };
+  if (isLoading) {
+    return <p>loading...</p>;
+  }
 
   return (
     <main>
@@ -96,38 +105,40 @@ export const Article = () => {
           <div id="project-carousel">
             {comments.map((comment) => {
               return (
-                <React.Fragment key={comment.comment_id}>
+                <React.Fragment key={comment.comment_id ?? comments.length * 13}>
                   <div className="comment-card-head">
                     <h3>{comment.author}</h3>
-                    <small>upvotes {comment.votes}</small>
+                    <DeleteCommentButton
+                      comment={comment}
+                      comments={comments}
+                      setComments={setComments}
+                      setUpvote={setUpvote}
+                    />
+                    <div>
+                      <UpvoteButton
+                        comment={comment}
+                        comments={comments}
+                        setComments={setComments}
+                      />
+                      <small>upvotes {comment.votes}</small>
+                      <DownvoteButton
+                        comment={comment}
+                        comments={comments}
+                        setComments={setComments}
+                      />
+                    </div>
                   </div>
                   <p className="comment-card-body">{comment.body}</p>
                 </React.Fragment>
               );
             })}
           </div>
-          <form onSubmit={handlePostComment}>
-            <label htmlFor="newComment" className="textarea-label">
-              <textarea
-                id="newComment"
-                className="textarea-label"
-                type="text"
-                name="newComment"
-                rows="4"
-                cols="70"
-                maxLength="220"
-              />
-            </label>
-            <button
-              className="btn"
-              type="button"
-              onClick={() => {
-                handleBackToArticles();
-              }}
-            >
-              Post Comment
-            </button>
-          </form>
+          <CommentForm
+            newComment={newComment}
+            setNewComment={setNewComment}
+            comments={comments}
+            setComments={setComments}
+          />
         </div>
       </section>
     </main>
