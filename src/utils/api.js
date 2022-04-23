@@ -32,8 +32,8 @@ export const getUsersByUsername = (username) => {
 
 // POST Requests
 
-export const postCommentToArticle = (username, string) => {
-  return newsApi.post(`/users/${username}`, {
+export const postCommentToArticle = (article_id, username, string) => {
+  return newsApi.post(`/articles/${article_id}/comments`, {
     body: `${string}`,
     username: `${username}`,
   });
@@ -41,8 +41,8 @@ export const postCommentToArticle = (username, string) => {
 
 // PATCH Requests
 
-export const castVote = (article_id, votes) => {
-  return newsApi.patch(`/articles/${article_id}`, { inc_votes: votes });
+export const castVote = (comment_id, votes) => {
+  return newsApi.patch(`/comments/${comment_id}`, { inc_votes: votes });
 };
 
 // another patch request has largely the same logic. make that one too, or can this one be reusable?

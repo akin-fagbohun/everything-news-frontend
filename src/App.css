@@ -22,7 +22,6 @@
 }
 
 .commentsHeader {
-  cursor: pointer;
   max-width: 80%;
   padding: 20px;
   margin: 10px auto 0;
@@ -66,9 +65,46 @@
   text-transform: uppercase;
 }
 
+.comment-btn {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 10px;
+  padding: 0.5rem 3rem;
+  border-radius: 5px;
+  border: 3px solid var(--mustard);
+  background-color: var(--pale-yellow);
+  color: var(--dark-grey);
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  letter-spacing: 0.1ch;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mod-comment-btn {
+  font-size: 0.5rem;
+  font-weight: bold;
+  margin: 10px;
+  padding: 0.25rem 1.5rem;
+  border-radius: 5px;
+  border: 3px solid var(--mustard);
+  background-color: var(--pale-yellow);
+  color: var(--dark-grey);
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  letter-spacing: 0.1ch;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .textarea-label {
   display: block;
   border: 3px solid var(--pale-yellow);
+  border-radius: 5px;
   margin: 10px 0;
   /* padding: 10px; */
   /* border, padding, and other styles go here,
@@ -122,11 +158,9 @@
 
   flex-flow: row;
   height: auto;
-  z-index: 1;
   min-width: 75%;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  cursor: pointer;
   display: flex;
   -webkit-box-align: stretch; /* Try this above! */
   align-items: stretch; /* Try this above! */
@@ -135,15 +169,22 @@
   padding-bottom: 1rem;
 }
 
+.comment-card-head > * {
+  vertical-align: middle;
+  margin: auto;
+}
+
 .comment-card-body {
   background-color: var(--off-white);
   width: 90%;
   height: auto;
+  min-height: 100px;
   padding: 0.5rem 3rem;
   /* height: 400px; */
   border-radius: 0 0 5px 5px;
   margin: 0 auto 1rem auto;
   flex: 0 0 auto;
+  text-align: center;
 }
 
 /* comments carousel ends */
