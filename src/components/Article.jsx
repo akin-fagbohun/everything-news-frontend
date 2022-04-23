@@ -8,6 +8,7 @@ export const Article = () => {
   const [upvote, setUpvote] = useState(null);
   const [likeState, setLikeState] = useState('Like 💫');
   const [comments, setComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { article_id } = useParams();
 
@@ -20,11 +21,10 @@ export const Article = () => {
       .then(() => {
         getCommentsByArticlesId(article_id).then(({ data }) => {
           setComments(data.comments);
+          setIsLoading(false);
         });
       });
   }, [article_id]);
-
-  useEffect(() => {}, [upvote]);
 
   const handleBackToArticles = () => {
     console.log('inside button click');
@@ -32,22 +32,26 @@ export const Article = () => {
 
   const handleLikes = (vote) => {
     if (likeState === 'Like 💫') {
-      setUpvote((currVotes) => {
-        currVotes + vote;
-      });
+      setUpvote((currentVotes) => currentVotes + vote);
       setLikeState('Liked ❤️');
-      castVote(article_id, vote).then(({ data }) => {
-        setArticle(data.article);
-        setUpvote(data.votes);
+      castVote(article_id, vote).catch((err) => {
+        if (err) {
+          setLikeState('Try Again');
+          setTimeout(() => {
+            setLikeState(likeState);
+          }, 1000);
+        }
       });
     } else {
-      setUpvote((currVotes) => {
-        currVotes + vote;
-      });
+      setUpvote((currentVotes) => currentVotes + vote);
       setLikeState('Like 💫');
-      castVote(article_id, vote).then(({ data }) => {
-        setArticle(data.article);
-        setUpvote(data.votes);
+      castVote(article_id, vote).catch((err) => {
+        if (err) {
+          setLikeState('Try Again');
+          setTimeout(() => {
+            setLikeState(likeState);
+          }, 1000);
+        }
       });
     }
   };
@@ -55,6 +59,10 @@ export const Article = () => {
   const handlePostComment = (comment) => {
     console.log(comment);
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <main>
@@ -64,7 +72,7 @@ export const Article = () => {
         <div className="credentials">
           <small>Article written by {article.author}</small>
           <p>Category {article.topic}</p>
-          <p>Likes {upvote ?? article.votes}</p>
+          <p>Likes {upvote}</p>
         </div>
         <button
           className="btn"
