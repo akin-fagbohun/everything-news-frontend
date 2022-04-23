@@ -41,9 +41,8 @@ export const postCommentToArticle = (username, string) => {
 
 // PATCH Requests
 
-export const addKudos = (article_id) => {
-  // only want this to be able to run once... How to handle that situation so kudos cant be spammed?
-  return newsApi.patch(`/articles/${article_id}`, { inc_votes: 1 });
+export const castVote = (article_id, votes) => {
+  return newsApi.patch(`/articles/${article_id}`, { inc_votes: votes });
 };
 
 // another patch request has largely the same logic. make that one too, or can this one be reusable?
