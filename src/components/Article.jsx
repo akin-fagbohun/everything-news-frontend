@@ -26,11 +26,25 @@ export const Article = () => {
     if (likeState === 'Like 💫') {
       setUpvote((currentVotes) => currentVotes + vote);
       setLikeState('Liked ❤️');
-      castVote(article_id, vote);
+      castVote(article_id, vote).catch((err) => {
+        if (err) {
+          setLikeState('Try Again');
+          setTimeout(() => {
+            setLikeState(likeState);
+          }, 1000);
+        }
+      });
     } else {
       setUpvote((currentVotes) => currentVotes + vote);
       setLikeState('Like 💫');
-      castVote(article_id, vote);
+      castVote(article_id, vote).catch((err) => {
+        if (err) {
+          setLikeState('Try Again');
+          setTimeout(() => {
+            setLikeState(likeState);
+          }, 1000);
+        }
+      });
     }
   };
 
