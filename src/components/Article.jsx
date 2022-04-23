@@ -1,21 +1,29 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getArticleById, castVote } from '../utils/api';
+import * as React from 'react';
+import { getArticleById, castVote, getCommentsByArticlesId } from '../utils/api';
 
 export const Article = () => {
   const [article, setArticle] = useState([]);
   const [upvote, setUpvote] = useState(null);
   const [likeState, setLikeState] = useState('Like 💫');
+  const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const { article_id } = useParams();
 
   useEffect(() => {
-    getArticleById(article_id).then(({ data }) => {
-      setArticle(data.article);
-      setUpvote(data.article.votes);
-      setIsLoading(false);
-    });
+    getArticleById(article_id)
+      .then(({ data }) => {
+        setArticle(data.article);
+        setUpvote(data.votes);
+      })
+      .then(() => {
+        getCommentsByArticlesId(article_id).then(({ data }) => {
+          setComments(data.comments);
+          setIsLoading(false);
+        });
+      });
   }, [article_id]);
 
   const handleBackToArticles = () => {
@@ -46,6 +54,10 @@ export const Article = () => {
         }
       });
     }
+  };
+
+  const handlePostComment = (comment) => {
+    console.log(comment);
   };
 
   if (isLoading) {
@@ -87,10 +99,43 @@ export const Article = () => {
         </button>
       </section>
       <section>
-        <div className="articleComments">
-          <p>
-            Show Number of Comments here <br></br>make it modal, tiktok style!{' '}
-          </p>
+        <p className="commentsHeader">💬 {comments.length} Comments</p>
+        <div className="commentsBody">
+          <div id="project-carousel">
+            {comments.map((comment) => {
+              return (
+                <React.Fragment key={comment.comment_id}>
+                  <div className="comment-card-head">
+                    <h3>{comment.author}</h3>
+                    <small>upvotes {comment.votes}</small>
+                  </div>
+                  <p className="comment-card-body">{comment.body}</p>
+                </React.Fragment>
+              );
+            })}
+          </div>
+          <form onSubmit={handlePostComment}>
+            <label htmlFor="newComment" className="textarea-label">
+              <textarea
+                id="newComment"
+                className="textarea-label"
+                type="text"
+                name="newComment"
+                rows="4"
+                cols="70"
+                maxLength="220"
+              />
+            </label>
+            <button
+              className="btn"
+              type="button"
+              onClick={() => {
+                handleBackToArticles();
+              }}
+            >
+              Post Comment
+            </button>
+          </form>
         </div>
       </section>
     </main>
