@@ -25,10 +25,9 @@ export const Article = () => {
   useEffect(() => {
     getArticleById(article_id)
       .then((res) => {
-        console.log(res);
         const { data } = res;
         setArticle(data.article);
-        setUpvote(data.votes);
+        setUpvote(data.article.votes);
       })
       .then(() => {
         getCommentsByArticlesId(article_id).then(({ data }) => {
