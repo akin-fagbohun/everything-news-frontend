@@ -7,7 +7,6 @@ import { CommentForm } from './CommentForm';
 import { DeleteCommentButton } from './DeleteCommentButton';
 import { UpvoteButton } from './UpvoteButton';
 import { DownvoteButton } from './DownvoteButton';
-import { Article404 } from './Article404';
 
 export const Article = () => {
   // React Global Contexts
@@ -24,9 +23,7 @@ export const Article = () => {
 
   useEffect(() => {
     getArticleById(article_id)
-      .then((res) => {
-        console.log(res);
-        const { data } = res;
+      .then(({ data }) => {
         setArticle(data.article);
         setUpvote(data.votes);
       })
@@ -35,17 +32,8 @@ export const Article = () => {
           setComments(data.comments);
           setIsLoading(false);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-        return <Article404></Article404>;
       });
   }, [article_id]);
-
-  // const handleError = () => {
-  //   return;
-  // };
 
   const handleBackToArticles = () => {
     console.log('inside button click');
@@ -87,7 +75,7 @@ export const Article = () => {
 
   return (
     <main>
-      <section>
+      <section className="article">
         <h2 className="articleTitle">{article.title}</h2>
         <p className="articleBody">{article.body}</p>
         <div className="credentials">
