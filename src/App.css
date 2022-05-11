@@ -63,6 +63,8 @@
   line-height: normal;
   text-align: center;
   text-transform: uppercase;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
 .comment-btn {
@@ -189,12 +191,24 @@
 
 /* comments carousel ends */
 
+.formFilter {
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-column-gap: 1.5rem;
+  /* grid-row-gap: 1.5rem; */
+  margin: auto;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .cards > ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
   margin: auto;
+  padding: 0;
 }
 
 .card {
@@ -202,7 +216,17 @@
   border-radius: 0.25rem;
   display: flex;
   flex-direction: column;
-  position: relative;
+  justify-content: space-around;
+}
+
+.card > small,
+p {
+  align-self: center;
+  justify-content: center;
+}
+
+.card > button {
+  justify-content: flex-end;
 }
 
 .title {
@@ -214,6 +238,105 @@
     grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   }
 }
+
+/* articles styling starts */
+
+.articlesTitle {
+  margin: 50px auto 0;
+  max-width: 80%;
+  padding: 15px;
+  border-radius: 15px 15px 0 0;
+  background-color: var(--mustard);
+}
+
+.articlesBody {
+  margin: 0 auto;
+  max-width: 80%;
+  max-height: 1920px;
+  padding: 15px 25px 15px 25px;
+  border-radius: 0 0 5px 5px;
+  background-color: var(--off-white);
+}
+
+.commesnt-card-head {
+  background-color: var(--mid-grey);
+  color: var(--off-white);
+  width: 90%;
+  height: auto;
+  padding: 15px;
+  /* height: 400px; */
+
+  margin: 1rem auto 0 auto;
+  flex: 0 0 auto;
+
+  flex-flow: row;
+  height: auto;
+  min-width: 75%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  -webkit-box-align: stretch; /* Try this above! */
+  align-items: stretch; /* Try this above! */
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+
+.comment-card-head > * {
+  vertical-align: middle;
+  margin: auto;
+}
+
+.selectLabel {
+  display: block;
+  border: 3px solid var(--pale-yellow);
+  border-radius: 5px;
+  margin: 10px 0;
+  /* padding: 10px; */
+  /* border, padding, and other styles go here,
+  don't set the height, and don't use floats or positioning */
+}
+
+.filterComment-btn {
+  font-size: 0.5rem;
+  font-weight: bold;
+  margin: auto;
+  padding: 0.25rem 1.5rem;
+  border-radius: 5px;
+  border: 3px solid var(--mustard);
+  background-color: var(--pale-yellow);
+  color: var(--dark-grey);
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  letter-spacing: 0.1ch;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#articlesScroll {
+  margin: 5px auto 10px;
+  padding: 4px;
+  width: 100%;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+  display: inline-block;
+  font-size: 1rem;
+
+  border-radius: 5px;
+  color: var(--dark-grey);
+  vertical-align: middle;
+  letter-spacing: 0.1ch;
+  line-height: normal;
+  text-align: center;
+}
+
+/* articles styling ends  */
+
+/* article styling starts */
 
 .articleTitle {
   margin: 50px auto 0;
@@ -229,10 +352,6 @@
   padding: 15px 25px 15px 25px;
   background-color: var(--off-white);
 }
-
-/* .articleBody > p {
-  justify-content: left;
-} */
 
 .credentials {
   margin: 0 auto;
@@ -256,3 +375,5 @@
   justify-content: space-between;
   padding-bottom: 1rem;
 }
+
+/* article styling ends  */
