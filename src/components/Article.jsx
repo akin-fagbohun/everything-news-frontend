@@ -123,6 +123,7 @@ export const Article = () => {
         <div className="commentsBody">
           <div id="project-carousel">
             {comments.map((comment) => {
+              console.log(comment.author);
               return (
                 <React.Fragment key={comment.comment_id ?? comments.length * 13}>
                   <div className="comment-card-head">

@@ -6,11 +6,12 @@ export const UpvoteButton = (props) => {
   // React Global Contexts
   const { loggedIn } = useContext(UserContext);
 
-  const { comment, comments, setComments } = props;
+  const { comment, comments, setComments, event } = props;
 
   const [upvoted, setUpvoted] = useState('Up 🔥');
 
   const handleUpvote = () => {
+    event.preventDefault();
     if (upvoted === 'Up 🔥') {
       setUpvoted('upvoted!');
       setComments(
@@ -18,10 +19,14 @@ export const UpvoteButton = (props) => {
           comm.comment_id === comment.comment_id ? { ...comm, votes: comm.votes + 1 } : comm;
         })
       );
-      castVote(comment.comment_id, 1).catch((err) => {
-        console.log(err);
-        // maybe a nice button transition here.
-      });
+      castVote(comment.comment_id, 1)
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          // maybe a nice button transition here.
+        });
     } else if (upvoted !== 'Up 🔥') {
       setUpvoted('Up 🔥');
       setComments(
@@ -29,10 +34,14 @@ export const UpvoteButton = (props) => {
           comm.comment_id === comment.comment_id ? { ...comm, votes: comm.votes - 1 } : comm;
         })
       );
-      castVote(comment.comment_id, -1).catch((err) => {
-        console.log(err);
-        // maybe a nice button transition here.
-      });
+      castVote(comment.comment_id, -1)
+        .then(({ data }) => {
+          console.log({ data });
+        })
+        .catch((err) => {
+          console.log(err);
+          // maybe a nice button transition here.
+        });
     }
   };
 
