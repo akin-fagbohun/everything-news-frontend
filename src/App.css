@@ -63,8 +63,6 @@
   line-height: normal;
   text-align: center;
   text-transform: uppercase;
-  align-items: flex-end;
-  justify-content: space-between;
 }
 
 .comment-btn {
@@ -195,24 +193,12 @@
 
 /* comments carousel ends */
 
-.formFilter {
-  display: flex;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  grid-column-gap: 1.5rem;
-  /* grid-row-gap: 1.5rem; */
-  margin: auto;
-  padding: 5px;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .cards > ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
   margin: auto;
-  padding: 0;
 }
 
 .card {
@@ -362,6 +348,10 @@ p {
   background-color: var(--off-white);
 }
 
+/* .articleBody > p {
+  justify-content: left;
+} */
+
 .credentials {
   margin: 0 auto;
   max-width: 80%;
@@ -384,5 +374,3 @@ p {
   justify-content: space-between;
   padding-bottom: 1rem;
 }
-
-/* article styling ends  */

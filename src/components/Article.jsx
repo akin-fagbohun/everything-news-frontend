@@ -83,7 +83,7 @@ export const Article = () => {
 
   return (
     <main>
-      <section>
+      <section className="article">
         <h2 className="articleTitle">{article.title}</h2>
         <p className="articleBody">{article.body}</p>
         <div className="credentials">

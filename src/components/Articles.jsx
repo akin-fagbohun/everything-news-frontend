@@ -63,53 +63,46 @@ export const Articles = () => {
 
   return (
     <main>
-      <h1 className="articlesTitle">Articles</h1>
-      <section className="articlesBody">
-        <form
-          className="formFilter"
-          onSubmit={(e) => {
-            handleFiltering(e);
-          }}
+      <h1>Articles</h1>
+      <form
+        onSubmit={(e) => {
+          handleFiltering(e);
+        }}
+      >
+        <select
+          name="categories"
+          id="categorySelect"
+          onChange={(event) => handleCategoryFilter(event)}
         >
-          <select
-            className="selectLabel"
-            name="categories"
-            id="categorySelect"
-            onChange={(event) => handleCategoryFilter(event)}
-          >
-            <option value=""></option>
-            {categories.map((category, i) => {
-              return (
-                <option key={i} value={category}>
-                  {category}
-                </option>
-              );
-            })}
-          </select>
-          <select
-            className="selectLabel"
-            name="sort_by"
-            id="sortBy"
-            onChange={(event) => handleSortByFilter(event)}
-          >
-            <option value=""></option>
-            <option value="votes">Likes</option>
-            <option value="comment_count">Comments</option>
-            <option value="created_at">Article Date</option>
-          </select>
-          {/* <select
+          <option value=""></option>
+          {categories.map((category, i) => {
+            return (
+              <option key={i} value={category}>
+                {category}
+              </option>
+            );
+          })}
+        </select>
+        <select name="sort_by" id="sortBy" onChange={(event) => handleSortByFilter(event)}>
+          <option value=""></option>
+          <option value="votes">Likes</option>
+          <option value="comment_count">Comments</option>
+          <option value="created_at">Article Date</option>
+        </select>
+        {/* <select
           name="order"
           id="orderBy"
           onChange={(event) => setSortDirection(event.target.value)}
-          >
+        >
           <option value=""></option>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select> */}
-          <button className="filterComment-btn" type="submit">
-            filter
-          </button>
-        </form>
+        <button className="filterComment-btn" type="submit">
+          filter
+        </button>
+      </form>
+      <section>
         <section id="articlesScroll" className="cards">
           <ul>
             {articles.map((article) => {
