@@ -176,6 +176,10 @@
   margin: auto;
 }
 
+.no-bullets {
+  list-style-type: none;
+}
+
 .comment-card-body {
   background-color: var(--off-white);
   width: 90%;
@@ -217,6 +221,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin: 10px;
 }
 
 .card > small,
@@ -227,6 +232,10 @@ p {
 
 .card > button {
   justify-content: flex-end;
+}
+
+.topicsCards {
+  padding: 0;
 }
 
 .title {
@@ -258,7 +267,7 @@ p {
   background-color: var(--off-white);
 }
 
-.commesnt-card-head {
+.comments-card-head {
   background-color: var(--mid-grey);
   color: var(--off-white);
   width: 90%;

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // import { UserContext } from '../contexts/Users';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
@@ -7,11 +7,11 @@ import { CommentForm } from './CommentForm';
 import { DeleteCommentButton } from './DeleteCommentButton';
 import { UpvoteButton } from './UpvoteButton';
 import { DownvoteButton } from './DownvoteButton';
-import { Article404 } from './Article404';
+// import { UserProvider } from '../contexts/Users';
 
 export const Article = () => {
   // React Global Contexts
-  // const { loggedIn } = useContext(UserContext);
+  // const { loggedIn } = useContext(UserProvider);
 
   const [article, setArticle] = useState([]);
   const [upvote, setUpvote] = useState(null);
@@ -21,6 +21,7 @@ export const Article = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { article_id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getArticleById(article_id)
@@ -37,14 +38,10 @@ export const Article = () => {
       })
       .catch((err) => {
         console.log(err);
+        navigate('/404');
         setIsLoading(false);
-        return <Article404></Article404>;
       });
-  }, [article_id]);
-
-  // const handleError = () => {
-  //   return;
-  // };
+  }, [article_id, navigate]);
 
   const handleBackToArticles = () => {
     console.log('inside button click');

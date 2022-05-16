@@ -10,15 +10,12 @@ export const UpvoteButton = (props) => {
 
   const [upvoted, setUpvoted] = useState('Up 🔥');
 
-  const handleUpvote = (event) => {
-    console.log(event, '<<< event');
-    event.preventDefault();
+  const handleUpvote = () => {
+    // event.preventDefault();
     if (upvoted === 'Up 🔥') {
       setUpvoted('upvoted!');
       setComments(
         comments.map((comm) => {
-          console.log(comment.comment_id, '<<< comment');
-          console.log(comm.comment_id, '<<< comm');
           comm.comment_id === comment.comment_id ? { ...comm, votes: comm.votes + 1 } : comm;
         })
       );
@@ -42,7 +39,7 @@ export const UpvoteButton = (props) => {
     return;
   } else if (comment.author !== loggedIn) {
     return (
-      <button className="mod-comment-btn" onClick={(event) => handleUpvote(event)}>
+      <button className="mod-comment-btn" onClick={handleUpvote}>
         {upvoted}
       </button>
     );

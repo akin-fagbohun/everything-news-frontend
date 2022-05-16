@@ -5,7 +5,7 @@ import { Home } from './components/Home';
 import { Articles } from './components/Articles';
 import { Article } from './components/Article';
 import { Topics } from './components/Topics';
-// import { Article404 } from './components/Article404';
+import { NotFound404 } from './components/NotFound404';
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
         <Route path="/articles/topics/:topic" element={<Articles />}></Route>
         <Route path="/articles/:article_id" element={<Article />}></Route>
         <Route path="/articles/:article_id/:article_title" element={<Article />}></Route>
-        {/* <Route component={Article404} /> */}
         <Route path="/topics" element={<Topics />}></Route>
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
     </div>
   );

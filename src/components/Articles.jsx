@@ -15,12 +15,17 @@ export const Articles = () => {
   const { topic, sort_by } = useParams();
 
   useEffect(() => {
-    getArticles(topic, sort_by).then(({ data }) => {
-      const categories = data.articles.map((article) => article.topic);
-      setArticles(data.articles);
-      setCategories([...new Set(categories)]);
-    });
-  }, []); // eslint-disable-line
+    getArticles(topic, sort_by)
+      .then(({ data }) => {
+        const categories = data.articles.map((article) => article.topic);
+        setArticles(data.articles);
+        setCategories([...new Set(categories)]);
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate('/404');
+      });
+  }, [navigate]); // eslint-disable-line
 
   useEffect(() => {}, [articles]);
 
@@ -110,7 +115,7 @@ export const Articles = () => {
             {articles.map((article) => {
               return (
                 <li key={article.article_id} className="card">
-                  <h5 add>
+                  <h5>
                     <Link to={`/articles/${article.article_id}`}>{article.title}</Link>
                   </h5>
                   <small>Author {article.author}</small>
