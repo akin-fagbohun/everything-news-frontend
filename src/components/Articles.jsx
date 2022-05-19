@@ -76,8 +76,9 @@ export const Articles = () => {
 
   return (
     <main>
-      <h1>Articles</h1>
+      <h1 className="articlesTitle">Articles</h1>
       <form
+        className="articlesBody"
         onSubmit={(e) => {
           handleFiltering(e);
         }}
@@ -110,7 +111,7 @@ export const Articles = () => {
           filter
         </button>
       </form>
-      <section>
+      <section className="articlesBody">
         <section id="articlesScroll" className="cards">
           <ul>
             {articles.map((article) => {

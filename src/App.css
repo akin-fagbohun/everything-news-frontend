@@ -346,9 +346,18 @@ p {
   background-color: var(--off-white);
 }
 
-/* .articleBody > p {
-  justify-content: left;
-} */
+form.articlesBody {
+  padding: 25px 8px 8px 20px;
+  text-decoration: none;
+  font-size: 0.6em;
+  transition: 0.3s;
+  align-self: flex-start;
+  border-radius: 5px;
+}
+
+form.articlesBody select {
+  padding: 5px;
+}
 
 .credentials {
   margin: 0 auto;
@@ -375,8 +384,6 @@ p {
 
 nav {
   display: flex;
-  /* grid-template-columns: 5em 100px 25%; */
-  /* grid-template-rows: 50px auto; */
   justify-content: space-around;
   align-items: center;
   min-height: 4vh;
