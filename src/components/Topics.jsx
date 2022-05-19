@@ -7,12 +7,14 @@ export const Topics = () => {
   const [status, setStatus] = useState('idle');
   const [chosen, setChosen] = useState(null);
   const [articles, setArticles] = useState([]);
+  // const [setCategorySelect] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     getTopics()
       .then(({ data }) => {
+        console.log(data.topics, '<<< data.topics');
         setTopics(data.topics);
         setStatus('resolved');
       })
@@ -27,7 +29,6 @@ export const Topics = () => {
     console.log(e.target.value);
     setChosen(e.target.value);
     getFilteredArticles(e.target.value).then(({ data }) => {
-      console.log(data.articles, '<<< data.articles in button click');
       setArticles(data.articles);
     });
   };
@@ -40,6 +41,10 @@ export const Topics = () => {
 
     navigate(`/articles/${article_id}/${url_title}`);
   };
+
+  // const handleCategoryFilter = (event) => {
+  //   event.target.value === '' ? setCategorySelect(null) : setCategorySelect(event.target.value);
+  // };
 
   if (status === 'idle') {
     return (
@@ -83,45 +88,9 @@ export const Topics = () => {
     return (
       <main>
         <h1>Showing {chosen}</h1>
-        <form
-        // onSubmit={(e) => handleFiltering(e)}
-        >
-          <select
-            name="categories"
-            id="categorySelect"
-            // onChange={(event) => handleCategoryFilter(event)}
-          >
-            <option value=""></option>
-            {topics.map((topic, i) => {
-              return (
-                <option key={i} value={topic.title}>
-                  {topic.title}
-                </option>
-              );
-            })}
-          </select>
-          <select
-            name="sort_by"
-            id="sortBy"
-            // onChange={(event) => handleSortByFilter(event)}
-          >
-            <option value=""></option>
-            <option value="votes">Likes</option>
-            <option value="created_at">Article Date</option>
-          </select>
-          <select
-            name="order"
-            id="orderBy"
-            // onChange={(event) => handleSortDirection(event)}
-          >
-            <option value=""></option>
-            <option value="asc">A-Z</option>
-            <option value="desc">Z-A</option>
-          </select>
-          <button className="filterComment-btn" type="submit">
-            filter
-          </button>
-        </form>
+        <button className="btn" type="button" onClick={() => window.location.reload()}>
+          Back to Topics
+        </button>
         <section>
           <section id="articlesScroll" className="cards">
             <ul>
