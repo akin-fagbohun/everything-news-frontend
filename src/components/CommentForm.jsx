@@ -22,7 +22,7 @@ export const CommentForm = (props) => {
     console.log(comments);
 
     if (postState === 'Post Comment' && loggedIn && newComment.length > 0) {
-      setComments([{ body: newComment, author: loggedIn, votes: 0, article_id }, ...comments]);
+      setComments([...comments, { body: newComment, author: loggedIn, votes: 0, article_id }]);
       setPostState('Posted 🎉');
       setTimeout(() => {
         setPostState('Post Comment');

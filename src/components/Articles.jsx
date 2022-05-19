@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react';
 import { getArticles } from '../utils/api';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 export const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState(null);
   const [sortBySelect, setSortBySelect] = useState(null);
-  // const [sortDirection, setSortDirection] = useState(null);
+  const [status, setStatus] = useState('idle');
+  const [sortDirection, setSortDirection] = useState('desc');
 
-  // navigate to endpoint
   const navigate = useNavigate();
-
-  const { topic, sort_by } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams({});
 
   useEffect(() => {
-    getArticles(topic, sort_by)
+    getArticles()
       .then(({ data }) => {
+        console.log(searchParams);
         const categories = data.articles.map((article) => article.topic);
         setArticles(data.articles);
         setCategories([...new Set(categories)]);
+        setStatus('resolved');
       })
       .catch((err) => {
         console.log(err);
@@ -38,6 +39,9 @@ export const Articles = () => {
     navigate(`/articles/${article_id}/${url_title}`);
   };
 
+  const handleSortDirection = (event) => {
+    event.target.value === '' ? setSortBySelect(null) : setSortDirection(event.target.value);
+  };
   const handleSortByFilter = (event) => {
     event.target.value === '' ? setSortBySelect(null) : setSortBySelect(event.target.value);
   };
@@ -48,18 +52,27 @@ export const Articles = () => {
 
   const handleFiltering = (event) => {
     event.preventDefault();
-    getArticles(categorySelect, sortBySelect).then(({ data }) => {
-      setArticles(data.articles);
-
+    getArticles(categorySelect, sortBySelect, sortDirection).then(({ data }) => {
       if (categorySelect && sortBySelect) {
-        navigate(`/articles?topic=${categorySelect}&sort_by=${sortBySelect}`);
-      } else if (categorySelect) {
-        navigate(`/articles?topic=${categorySelect}`);
-      } else if (sortBySelect) {
-        navigate(`/articles?sort_by=${sortBySelect}`);
+        setSearchParams({ topic: categorySelect, sort_by: sortBySelect, order: sortDirection });
       }
+      if (categorySelect && !sortBySelect) {
+        setSearchParams({ topic: categorySelect, order: sortDirection });
+      }
+      if (!categorySelect && sortBySelect) {
+        setSearchParams({ sort_by: sortBySelect, order: sortDirection });
+      }
+      setArticles(data.articles);
     });
   };
+
+  if (status === 'idle') {
+    return (
+      <main>
+        <p>loading...</p>
+      </main>
+    );
+  }
 
   return (
     <main>
@@ -86,18 +99,13 @@ export const Articles = () => {
         <select name="sort_by" id="sortBy" onChange={(event) => handleSortByFilter(event)}>
           <option value=""></option>
           <option value="votes">Likes</option>
-          <option value="comment_count">Comments</option>
           <option value="created_at">Article Date</option>
         </select>
-        {/* <select
-          name="order"
-          id="orderBy"
-          onChange={(event) => setSortDirection(event.target.value)}
-        >
+        <select name="order" id="orderBy" onChange={(event) => handleSortDirection(event)}>
           <option value=""></option>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
-        </select> */}
+        </select>
         <button className="filterComment-btn" type="submit">
           filter
         </button>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const newsApi = axios.create({
-  baseURL: 'https://akin-news-example.herokuapp.com/api',
+  baseURL: 'https://everything-news-backend.herokuapp.com/api',
 });
 
 // GET requests
@@ -10,12 +10,12 @@ export const getTopics = () => {
   return newsApi.get('/topics');
 };
 
-export const getArticles = (topic, sort_by) => {
-  return newsApi.get(`/articles`, { params: { topic, sort_by } });
+export const getArticles = (topic, sort_by, order) => {
+  return newsApi.get(`/articles`, { params: { topic, sort_by, order } });
 };
 
-export const getFilteredArticles = (topic, sort_by) => {
-  return newsApi.get(`/articles`, { params: { topic, sort_by } });
+export const getFilteredArticles = (topic) => {
+  return newsApi.get(`/articles`, { params: { topic } });
 };
 
 export const getArticleById = (article_id) => {
@@ -41,7 +41,11 @@ export const postCommentToArticle = (article_id, username, string) => {
 
 // PATCH Requests
 
-export const castVote = (comment_id, votes) => {
+export const castArticleVote = (article_id, votes) => {
+  return newsApi.patch(`/articles/${article_id}`, { inc_votes: votes });
+};
+
+export const castCommentVote = (comment_id, votes) => {
   return newsApi.patch(`/comments/${comment_id}`, { inc_votes: votes });
 };
 
