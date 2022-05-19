@@ -1,26 +1,6 @@
 <div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
@@ -125,10 +105,10 @@ This is an example of how to list things you need to use the software and how to
 
 ## Roadmap
 
+- Adding footer with contact information and other project links.
 - Comment upvoting and downvoting.
-- Comment upvoting and downvoting.
-- Posting new articles
-- Integration with personal portfolio to add blog functionality
+- Posting new articles.
+- Integration with personal portfolio to add blog functionality.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -145,16 +125,7 @@ Project Link: [https://github.com/akin-fagbohun/everything-news-frontend](https:
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/akin-fagbohun/everything-news-frontend.svg?style=for-the-badge
-[contributors-url]: https://github.com/akin-fagbohun/everything-news-frontend/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/akin-fagbohun/everything-news-frontend.svg?style=for-the-badge
-[forks-url]: https://github.com/akin-fagbohun/everything-news-frontend/network/members
-[stars-shield]: https://img.shields.io/github/stars/akin-fagbohun/everything-news-frontend.svg?style=for-the-badge
-[stars-url]: https://github.com/akin-fagbohun/everything-news-frontend/stargazers
 [issues-shield]: https://img.shields.io/github/issues/akin-fagbohun/everything-news-frontend.svg?style=for-the-badge
 [issues-url]: https://github.com/akin-fagbohun/everything-news-frontend/issues
-[license-shield]: https://img.shields.io/github/license/akin-fagbohun/everything-news-frontend.svg?style=for-the-badge
-[license-url]: https://github.com/akin-fagbohun/everything-news-frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/akinfagohun
-[product-screenshot]: images/screenshot.png

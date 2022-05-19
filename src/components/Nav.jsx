@@ -22,18 +22,29 @@ export const Nav = () => {
 
   return (
     <nav>
-      <Link to="/">Home</Link> | <Link to="/articles">Articles</Link> |{' '}
-      <Link to="/topics">Topics</Link> |
-      <select name="users" id="user-select" onChange={(event) => handleLogin(event.target.value)}>
-        <option value=""></option>
-        {allUsers.map((username, i) => {
-          return (
-            <option key={i} value={username}>
-              {username}
-            </option>
-          );
-        })}
-      </select>
+      <div className="nav-group">
+        <ul className="nav-links">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/articles">Articles</Link>
+          </li>
+          <li>
+            <Link to="/topics">Topics</Link>
+          </li>
+        </ul>
+        <select name="users" id="user-select" onChange={(event) => handleLogin(event.target.value)}>
+          <option value=""></option>
+          {allUsers.map((username, i) => {
+            return (
+              <option key={i} value={username}>
+                {username}
+              </option>
+            );
+          })}
+        </select>
+      </div>
     </nav>
   );
 };
