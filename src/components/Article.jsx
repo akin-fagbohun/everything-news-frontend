@@ -1,24 +1,24 @@
 import { useParams, useNavigate } from 'react-router-dom';
-// import { UserContext } from '../contexts/Users';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
-import { getArticleById, castVote, getCommentsByArticlesId } from '../utils/api';
+import {
+  getArticleById,
+  castArticleVote,
+  /* castCommentVote,*/
+  getCommentsByArticlesId,
+} from '../utils/api';
 import { CommentForm } from './CommentForm';
 import { DeleteCommentButton } from './DeleteCommentButton';
-import { UpvoteButton } from './UpvoteButton';
-import { DownvoteButton } from './DownvoteButton';
-// import { UserProvider } from '../contexts/Users';
 
 export const Article = () => {
-  // React Global Contexts
-  // const { loggedIn } = useContext(UserProvider);
-
   const [article, setArticle] = useState([]);
   const [upvote, setUpvote] = useState(null);
   const [likeState, setLikeState] = useState('Like 💫');
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  // const [upvoted, setUpvoted] = useState('Up 🔥');
+  // const [downvoted, setDownvoted] = useState('Down ❄️');
 
   const { article_id } = useParams();
   const navigate = useNavigate();
@@ -43,26 +43,26 @@ export const Article = () => {
       });
   }, [article_id, navigate]);
 
-  const handleBackToArticles = () => {
-    console.log('inside button click');
-  };
-
   const handleLikes = (vote) => {
     if (likeState === 'Like 💫') {
       setUpvote((currentVotes) => currentVotes + vote);
       setLikeState('Liked ❤️');
-      castVote(article_id, vote).catch((err) => {
+      castArticleVote(article_id, vote).catch((err) => {
         if (err) {
-          setLikeState('Try Again');
           setTimeout(() => {
+            setLikeState('Try Again');
+          }, 500);
+
+          setTimeout(() => {
+            setUpvote((currentVotes) => currentVotes - vote);
             setLikeState(likeState);
-          }, 1000);
+          }, 2000);
         }
       });
     } else {
       setUpvote((currentVotes) => currentVotes + vote);
       setLikeState('Like 💫');
-      castVote(article_id, vote).catch((err) => {
+      castArticleVote(article_id, vote).catch((err) => {
         if (err) {
           setLikeState('Try Again');
           setTimeout(() => {
@@ -73,12 +73,50 @@ export const Article = () => {
     }
   };
 
-  if (isLoading) {
-    return <p>loading...</p>;
-  }
+  // const handleUpvote = (event, comment_id /*,currentVotes*/) => {
+  //   event.preventDefault();
+  //   if (upvoted === 'Up 🔥' && downvoted === 'Down ❄️') {
+  //     // cast an upvote
+  //     setUpvoted('upvoted!');
+
+  //     castCommentVote(comment_id, 1).catch((err) => {
+  //       console.log(err);
+  //     });
+  //   } else if (upvoted !== 'Up 🔥' && downvoted === 'Down ❄️') {
+  //     // recind an upvote
+  //     setUpvoted('Up 🔥');
+
+  //     castCommentVote(comment_id, -1).catch((err) => {
+  //       console.log(err);
+  //     });
+  //   } else if (upvoted === 'Up 🔥' && downvoted !== 'Down ❄️') {
+  //     // reset downvote.. i.e. recind downvote by clicking upvote
+  //     setDownvoted('Down ❄️');
+  //   }
+  // };
+
+  // const handleDownvote = (event, comment_id /*,currentVotes*/) => {
+  //   event.preventDefault();
+  //   if (downvoted === 'Down ❄️' && upvoted === 'Up 🔥') {
+  //     // cast a downvote
+  //     setDownvoted('downvoted!');
+  //     castCommentVote(comment_id, -1).catch((err) => {
+  //       console.log(err);
+  //     });
+  //   } else if (downvoted !== 'Down ❄️' && upvoted === 'Up 🔥') {
+  //     // recind a downvote
+  //     setDownvoted('Down ❄️');
+  //     castCommentVote(comment_id, +1).catch((err) => {
+  //       console.log(err);
+  //     });
+  //   } else if (downvoted === 'Down ❄️' && upvoted !== 'Up 🔥') {
+  //     // reset upvote.. i.e. recind upvote by clicking downvote
+  //     setUpvoted('Up 🔥');
+  //   }
+  // };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p>loading...</p>;
   }
 
   return (
@@ -109,7 +147,7 @@ export const Article = () => {
           className="btn"
           type="button"
           onClick={() => {
-            handleBackToArticles();
+            navigate('/articles');
           }}
         >
           Back to Articles
@@ -120,30 +158,29 @@ export const Article = () => {
         <div className="commentsBody">
           <div id="project-carousel">
             {comments.map((comment) => {
-              console.log(comment.author);
+              console.log(comment.username);
               return (
                 <React.Fragment key={comment.comment_id ?? comments.length * 13}>
                   <div className="comment-card-head">
-                    <h3>{comment.author}</h3>
+                    <h3>{comment.username}</h3>
                     <DeleteCommentButton
                       comment={comment}
                       comments={comments}
                       setComments={setComments}
                       setUpvote={setUpvote}
                     />
-                    <div>
-                      <UpvoteButton
-                        comment={comment}
-                        comments={comments}
-                        setComments={setComments}
-                      />
+                    {/* <>
+                      <button
+                        className="mod-comment-btn"
+                        onClick={(event) => handleUpvote(event, comment.comment_id, comment.votes)}
+                      >
+                        {upvoted}
+                      </button>
                       <small>upvotes {comment.votes}</small>
-                      <DownvoteButton
-                        comment={comment}
-                        comments={comments}
-                        setComments={setComments}
-                      />
-                    </div>
+                      <button className="mod-comment-btn" onClick={handleDownvote}>
+                        {downvoted}
+                      </button>
+                    </> */}
                   </div>
                   <p className="comment-card-body">{comment.body}</p>
                 </React.Fragment>

@@ -7,7 +7,7 @@ export const Nav = () => {
   const { loggedIn, setLoggedIn } = useContext(UserContext);
 
   // eslint-disable-next-line no-unused-vars
-  const [allUsers, setAllUsers] = useState(['jessjelly', 'tickle122', 'cooljmessy']);
+  const [allUsers, setAllUsers] = useState(['jessjelly', 'tickle122', 'cooljmessy', 'grumpy19']);
 
   useEffect(() => {
     if (loggedIn !== null) {
@@ -16,8 +16,8 @@ export const Nav = () => {
     }
   }, [loggedIn]);
 
-  const handleLogin = (event) => {
-    setLoggedIn(event);
+  const handleLogin = (user) => {
+    setLoggedIn(user);
   };
 
   return (

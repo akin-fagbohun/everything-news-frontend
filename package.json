@@ -12,10 +12,6 @@
     "prettier": "^2.6.2"
   },
   "dependencies": {
-    "@mantine/core": "^4.1.4",
-    "@mantine/hooks": "^4.1.4",
-    "@mantine/notifications": "^4.1.4",
-    "@mantine/rte": "^4.1.4",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",

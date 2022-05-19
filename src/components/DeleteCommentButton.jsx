@@ -5,8 +5,10 @@ import { deleteCommentById } from '../utils/api';
 export const DeleteCommentButton = (props) => {
   // React Global Contexts
   const { loggedIn } = useContext(UserContext);
+  console.log(loggedIn);
 
   const { comment, comments, setComments } = props;
+  console.log(comment.username);
 
   const handleDeleteComment = () => {
     console.log(comments, '<< comments inside handler');
@@ -27,7 +29,9 @@ export const DeleteCommentButton = (props) => {
 
   if (!loggedIn) {
     return;
-  } else if (comment.author === loggedIn) {
+  }
+
+  if (comment.username === loggedIn) {
     return (
       <button className="mod-comment-btn" onClick={handleDeleteComment}>
         Delete Comment
