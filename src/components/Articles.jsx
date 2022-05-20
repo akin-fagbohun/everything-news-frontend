@@ -42,6 +42,7 @@ export const Articles = () => {
   const handleSortDirection = (event) => {
     event.target.value === '' ? setSortBySelect(null) : setSortDirection(event.target.value);
   };
+
   const handleSortByFilter = (event) => {
     event.target.value === '' ? setSortBySelect(null) : setSortBySelect(event.target.value);
   };
@@ -54,7 +55,11 @@ export const Articles = () => {
     event.preventDefault();
     getArticles(categorySelect, sortBySelect, sortDirection).then(({ data }) => {
       if (categorySelect && sortBySelect) {
-        setSearchParams({ topic: categorySelect, sort_by: sortBySelect, order: sortDirection });
+        setSearchParams({
+          topic: categorySelect,
+          sort_by: sortBySelect,
+          order: sortDirection,
+        });
       }
       if (categorySelect && !sortBySelect) {
         setSearchParams({ topic: categorySelect, order: sortDirection });
