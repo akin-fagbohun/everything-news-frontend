@@ -1,12 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
-import {
-  getArticleById,
-  castArticleVote,
-  /* castCommentVote,*/
-  getCommentsByArticlesId,
-} from '../utils/api';
+import { getArticleById, castArticleVote, getCommentsByArticlesId } from '../utils/api';
 import { CommentForm } from './CommentForm';
 import { DeleteCommentButton } from './DeleteCommentButton';
 
@@ -17,8 +12,6 @@ export const Article = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  // const [upvoted, setUpvoted] = useState('Up 🔥');
-  // const [downvoted, setDownvoted] = useState('Down ❄️');
 
   const { article_id } = useParams();
   const navigate = useNavigate();
@@ -72,48 +65,6 @@ export const Article = () => {
       });
     }
   };
-
-  // const handleUpvote = (event, comment_id /*,currentVotes*/) => {
-  //   event.preventDefault();
-  //   if (upvoted === 'Up 🔥' && downvoted === 'Down ❄️') {
-  //     // cast an upvote
-  //     setUpvoted('upvoted!');
-
-  //     castCommentVote(comment_id, 1).catch((err) => {
-  //       console.log(err);
-  //     });
-  //   } else if (upvoted !== 'Up 🔥' && downvoted === 'Down ❄️') {
-  //     // recind an upvote
-  //     setUpvoted('Up 🔥');
-
-  //     castCommentVote(comment_id, -1).catch((err) => {
-  //       console.log(err);
-  //     });
-  //   } else if (upvoted === 'Up 🔥' && downvoted !== 'Down ❄️') {
-  //     // reset downvote.. i.e. recind downvote by clicking upvote
-  //     setDownvoted('Down ❄️');
-  //   }
-  // };
-
-  // const handleDownvote = (event, comment_id /*,currentVotes*/) => {
-  //   event.preventDefault();
-  //   if (downvoted === 'Down ❄️' && upvoted === 'Up 🔥') {
-  //     // cast a downvote
-  //     setDownvoted('downvoted!');
-  //     castCommentVote(comment_id, -1).catch((err) => {
-  //       console.log(err);
-  //     });
-  //   } else if (downvoted !== 'Down ❄️' && upvoted === 'Up 🔥') {
-  //     // recind a downvote
-  //     setDownvoted('Down ❄️');
-  //     castCommentVote(comment_id, +1).catch((err) => {
-  //       console.log(err);
-  //     });
-  //   } else if (downvoted === 'Down ❄️' && upvoted !== 'Up 🔥') {
-  //     // reset upvote.. i.e. recind upvote by clicking downvote
-  //     setUpvoted('Up 🔥');
-  //   }
-  // };
 
   if (isLoading) {
     return <p>loading...</p>;
@@ -169,18 +120,6 @@ export const Article = () => {
                       setComments={setComments}
                       setUpvote={setUpvote}
                     />
-                    {/* <>
-                      <button
-                        className="mod-comment-btn"
-                        onClick={(event) => handleUpvote(event, comment.comment_id, comment.votes)}
-                      >
-                        {upvoted}
-                      </button>
-                      <small>upvotes {comment.votes}</small>
-                      <button className="mod-comment-btn" onClick={handleDownvote}>
-                        {downvoted}
-                      </button>
-                    </> */}
                   </div>
                   <p className="comment-card-body">{comment.body}</p>
                 </React.Fragment>

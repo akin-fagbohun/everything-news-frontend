@@ -7,7 +7,6 @@ export const Topics = () => {
   const [status, setStatus] = useState('idle');
   const [chosen, setChosen] = useState(null);
   const [articles, setArticles] = useState([]);
-  // const [setCategorySelect] = useState(null);
 
   const navigate = useNavigate();
 
@@ -41,10 +40,6 @@ export const Topics = () => {
 
     navigate(`/articles/${article_id}/${url_title}`);
   };
-
-  // const handleCategoryFilter = (event) => {
-  //   event.target.value === '' ? setCategorySelect(null) : setCategorySelect(event.target.value);
-  // };
 
   if (status === 'idle') {
     return (

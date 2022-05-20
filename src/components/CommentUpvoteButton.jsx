@@ -11,7 +11,6 @@ export const UpvoteButton = (props) => {
   const [upvoted, setUpvoted] = useState('Up 🔥');
 
   const handleUpvote = () => {
-    // event.preventDefault();
     if (upvoted === 'Up 🔥') {
       setUpvoted('upvoted!');
       setComments(

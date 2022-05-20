@@ -20,7 +20,6 @@ export const DownvoteButton = (props) => {
       );
       castVote(comment.comment_id, -1).catch((err) => {
         console.log(err);
-        // maybe a nice button transition here.
       });
     } else if (downvoted !== 'Down ❄️') {
       setDownvoted('Down ❄️');
@@ -31,7 +30,6 @@ export const DownvoteButton = (props) => {
       );
       castVote(comment.comment_id, +1).catch((err) => {
         console.log(err);
-        // maybe a nice button transition here.
       });
     }
   };
