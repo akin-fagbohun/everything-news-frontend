@@ -27,3 +27,5 @@ yarn-error.log*
 .eslintrc.json
 
 /app-design
+# Local Netlify folder
+.netlify
